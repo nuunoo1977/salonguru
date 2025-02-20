@@ -1,0 +1,31 @@
+{
+    "dart.lineLength": 100,
+    "dartImport.fixOnSave": true,
+    "dartImport.excludeGeneratedFiles": [
+        "g.dart",
+        "config.dart",
+        "freezed.dart",
+        "gr.dart"
+    ],
+    "[dart]": {
+        "editor.rulers": [
+            100
+        ],
+        "editor.formatOnSave": true,
+    },
+    "files.exclude": {
+        "**/*.freezed.dart": false,
+        "**/*.gr.dart": false,
+        "**/*.g.dart": false
+    },
+    // https://github.com/antfu/vscode-file-nesting-config
+    "explorer.fileNesting.enabled": true,
+    "explorer.fileNesting.expand": false,
+    "explorer.fileNesting.patterns": {
+        "*.dart": "$(capture).freezed.dart, $(capture).g.dart, $(capture).gr.dart",
+        ".gitignore": ".gitattributes, .gitmodules, .gitmessage, .mailmap, .git-blame*",
+        "pubspec.yaml": "pubspec.lock",
+    },
+    "java.configuration.updateBuildConfiguration": "interactive",
+  
+}

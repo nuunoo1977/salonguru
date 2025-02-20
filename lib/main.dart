@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:salonguru/configs/env.dart';
+
+import 'configs/env.dart';
 
 void main() {
   runApp(const MyApp());

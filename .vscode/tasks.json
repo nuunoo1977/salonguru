@@ -1,0 +1,57 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Flutter: build_runner Code Gen",
+            "type": "shell",
+            "command": "flutter packages pub run build_runner build --delete-conflicting-outputs",
+            "group": {
+                "kind": "none",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Flutter: test / analyze",
+            "type": "shell",
+            "command": "flutter analyze; flutter test",
+            "group": {
+                "kind": "none",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Flutter: clean, get, codegen",
+            "type": "shell",
+            "command": "flutter clean; flutter pub get; flutter packages pub run build_runner build --delete-conflicting-outputs",
+            "group": {
+                "kind": "none",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        },
+       
+        {
+            "label": "Flutter: build apk",
+            "type": "shell",
+            "command": "flutter build apk --dart-define-from-file=.env/prod.env",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Flutter: build ios DEV",
+            "type": "shell",
+            "command": "flutter build ios --dart-define-from-file=.env/prod.env",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        },
+      
+    ]
+}
