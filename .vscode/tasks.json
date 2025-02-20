@@ -35,7 +35,7 @@
         {
             "label": "Flutter: build apk",
             "type": "shell",
-            "command": "flutter build apk --dart-define-from-file=.env/prod.env",
+            "command": "flutter build apk --dart-define-from-file=.env/prod.env --dart-define env=prod",
             "group": {
                 "kind": "build",
                 "isDefault": true
@@ -45,7 +45,7 @@
         {
             "label": "Flutter: build ios DEV",
             "type": "shell",
-            "command": "flutter build ios --dart-define-from-file=.env/prod.env",
+            "command": "flutter build ios --dart-define-from-file=.env/prod.env --dart-define env=prod",
             "group": {
                 "kind": "build",
                 "isDefault": true

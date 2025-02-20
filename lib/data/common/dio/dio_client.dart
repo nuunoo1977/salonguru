@@ -23,8 +23,8 @@ class DioClient {
           ),
         )..interceptors.addAll(
             [
-              ApiKeyInterceptor(apiKey),
               PrettyDioLogger(requestHeader: true, requestBody: true),
+              ApiKeyInterceptor(apiKey),
               DioErrorInterceptor(),
             ],
           );

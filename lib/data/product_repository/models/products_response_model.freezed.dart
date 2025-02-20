@@ -32,15 +32,16 @@ mixin _$ProductResponseModel {
 
 /// @nodoc
 abstract class $ProductResponseModelCopyWith<$Res> {
-  factory $ProductResponseModelCopyWith(
-          ProductResponseModel value, $Res Function(ProductResponseModel) then) =
+  factory $ProductResponseModelCopyWith(ProductResponseModel value,
+          $Res Function(ProductResponseModel) then) =
       _$ProductResponseModelCopyWithImpl<$Res, ProductResponseModel>;
   @useResult
   $Res call({int statusCode, List<ProductModel> products});
 }
 
 /// @nodoc
-class _$ProductResponseModelCopyWithImpl<$Res, $Val extends ProductResponseModel>
+class _$ProductResponseModelCopyWithImpl<$Res,
+        $Val extends ProductResponseModel>
     implements $ProductResponseModelCopyWith<$Res> {
   _$ProductResponseModelCopyWithImpl(this._value, this._then);
 
@@ -73,8 +74,8 @@ class _$ProductResponseModelCopyWithImpl<$Res, $Val extends ProductResponseModel
 /// @nodoc
 abstract class _$$ProductResponseModelImplCopyWith<$Res>
     implements $ProductResponseModelCopyWith<$Res> {
-  factory _$$ProductResponseModelImplCopyWith(
-          _$ProductResponseModelImpl value, $Res Function(_$ProductResponseModelImpl) then) =
+  factory _$$ProductResponseModelImplCopyWith(_$ProductResponseModelImpl value,
+          $Res Function(_$ProductResponseModelImpl) then) =
       __$$ProductResponseModelImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -85,8 +86,8 @@ abstract class _$$ProductResponseModelImplCopyWith<$Res>
 class __$$ProductResponseModelImplCopyWithImpl<$Res>
     extends _$ProductResponseModelCopyWithImpl<$Res, _$ProductResponseModelImpl>
     implements _$$ProductResponseModelImplCopyWith<$Res> {
-  __$$ProductResponseModelImplCopyWithImpl(
-      _$ProductResponseModelImpl _value, $Res Function(_$ProductResponseModelImpl) _then)
+  __$$ProductResponseModelImplCopyWithImpl(_$ProductResponseModelImpl _value,
+      $Res Function(_$ProductResponseModelImpl) _then)
       : super(_value, _then);
 
   /// Create a copy of ProductResponseModel
@@ -141,22 +142,25 @@ class _$ProductResponseModelImpl extends _ProductResponseModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ProductResponseModelImpl &&
-            (identical(other.statusCode, statusCode) || other.statusCode == statusCode) &&
+            (identical(other.statusCode, statusCode) ||
+                other.statusCode == statusCode) &&
             const DeepCollectionEquality().equals(other._products, _products));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, statusCode, const DeepCollectionEquality().hash(_products));
+  int get hashCode => Object.hash(
+      runtimeType, statusCode, const DeepCollectionEquality().hash(_products));
 
   /// Create a copy of ProductResponseModel
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$ProductResponseModelImplCopyWith<_$ProductResponseModelImpl> get copyWith =>
-      __$$ProductResponseModelImplCopyWithImpl<_$ProductResponseModelImpl>(this, _$identity);
+  _$$ProductResponseModelImplCopyWith<_$ProductResponseModelImpl>
+      get copyWith =>
+          __$$ProductResponseModelImplCopyWithImpl<_$ProductResponseModelImpl>(
+              this, _$identity);
 }
 
 abstract class _ProductResponseModel extends ProductResponseModel {
@@ -177,6 +181,6 @@ abstract class _ProductResponseModel extends ProductResponseModel {
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$ProductResponseModelImplCopyWith<_$ProductResponseModelImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$ProductResponseModelImplCopyWith<_$ProductResponseModelImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

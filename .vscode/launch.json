@@ -5,12 +5,25 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Debug DEV",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "--dart-define-from-file",
+                ".env/prod.env",
+                "--dart-define",
+                "env=dev",
+            ]
+        },
+        {
             "name": "Debug",
             "request": "launch",
             "type": "dart",
             "args": [
                 "--dart-define-from-file",
-                ".env/prod.env"
+                ".env/prod.env",
+                "--dart-define",
+                "env=prod",
             ]
         },
         {
@@ -20,7 +33,9 @@
             "flutterMode": "profile",
             "args": [
                 "--dart-define-from-file",
-                ".env/prod.env"
+                ".env/prod.env",
+                "--dart-define",
+                "env=prod",
             ]
         },
         {
@@ -30,7 +45,9 @@
             "flutterMode": "release",
             "args": [
                 "--dart-define-from-file",
-                ".env/prod.env"
+                ".env/prod.env",
+                "--dart-define",
+                "env=prod",
             ]
         }
     ]
