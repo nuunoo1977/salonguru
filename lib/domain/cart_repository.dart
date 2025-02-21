@@ -1,16 +1,8 @@
-import 'entities/cart_item.dart';
+import 'package:dartz/dartz.dart';
+
+import '../core/errors/failures.dart';
 
 abstract class CartRepository {
-  Stream<List<CartItem>> get watchItems;
-  Stream<CartItem?> watchItem(int id);
-
-  void update(CartItem item);
-
-  List<CartItem> getAll();
-
-  CartItem? get(int id);
-
-  void clear(int id);
-
-  void dispose();
+  Future<Either<Failure, Map<int, int>>> load();
+  Future<Either<Failure, void>> save(Map<int, int> items);
 }

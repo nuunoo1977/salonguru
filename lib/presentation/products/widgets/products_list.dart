@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../configs/di/injection.dart';
-import '../../../domain/cart_repository.dart';
-import '../../../domain/entities/cart_item.dart';
 import '../../../domain/entities/product.dart';
+import '../../common/cart_bloc/cart_cubit.dart';
 import 'product_card.dart';
 
 // TODO(nunofelicio): make grid responsive for different screen orientations
@@ -27,8 +26,7 @@ class ProductsList extends StatelessWidget {
         return ProductCard(
           product: products[index],
           key: ValueKey(products[index].id),
-          onTap: () =>
-              getIt<CartRepository>().update(CartItem(productId: products[index].id, quantity: 1)),
+          onTap: () => context.read<CartCubit>().addItem(products[index].id),
         );
       },
     );

@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../configs/di/injection.dart';
 import '../../configs/theme/app_textstyles.dart';
-import '../../domain/cart_repository.dart';
 import '../common/widgets/body_wrapper.dart';
+import '../common/widgets/cart_status_button.dart';
 import 'bloc/products_display_cubit.dart';
 import 'widgets/products_list.dart';
 
@@ -27,21 +27,7 @@ final class ProductsPage extends StatelessWidget {
                 },
               );
             }),
-            StreamBuilder(
-                stream: getIt<CartRepository>().watchItems,
-                builder: (context, snapshot) {
-                  return IconButton(
-                    icon: Badge(
-                      offset: const Offset(2, 12),
-                      isLabelVisible: snapshot.data?.isNotEmpty ?? false,
-                      label: Text(snapshot.data?.length.toString() ?? ''),
-                      child: const Icon(Icons.shopping_cart),
-                    ),
-                    onPressed: () {
-                      //context.read<ProductsDisplayCubit>().loadOrders(true);
-                    },
-                  );
-                }),
+            const CartStatusButton(),
           ],
         ),
         body: BodyWrapper(

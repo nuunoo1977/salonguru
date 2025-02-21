@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../configs/di/injection.dart';
 import '../../../configs/theme/app_textstyles.dart';
-import '../../../domain/cart_repository.dart';
 import '../../../domain/entities/product.dart';
+import '../../common/cart_bloc/cart_cubit.dart';
 import '../../common/widgets/network_image_with_loader.dart';
 
 // TODO(nunofelicio): add availabilty information (Sold out banner)
@@ -46,16 +46,14 @@ class ProductCard extends StatelessWidget {
                 Positioned(
                   right: 12,
                   top: 8,
-                  child: StreamBuilder(
-                      stream: getIt<CartRepository>().watchItem(product.id),
-                      builder: (context, snapshot) {
-                        return Badge(
-                          isLabelVisible: snapshot.data != null,
-                          label: Text(snapshot.data?.quantity.toString() ?? ''),
-                          //label: Text("99"),
-                          child: Container(),
-                        );
-                      }),
+                  child: BlocBuilder<CartCubit, CartState>(
+                      buildWhen: (previous, current) =>
+                          current.itemQty(product.id) != previous.itemQty(product.id),
+                      builder: (context, state) => Badge(
+                            isLabelVisible: state.itemQty(product.id) > 0,
+                            label: Text(state.itemQty(product.id).toString()),
+                            child: Container(),
+                          )),
                 ),
               ]),
               SizedBox(height: 2),
@@ -72,32 +70,4 @@ class ProductCard extends StatelessWidget {
           ),
         ),
       );
-
-  // @override
-  // Widget build(BuildContext context) {
-  //   return GestureDetector(
-  //     onTap: () {
-  //       //AppNavigator.push(context, const MyOrdersPage());
-  //     },
-  //     child: Container(
-  //       height: 150,
-  //       padding: const EdgeInsets.symmetric(horizontal: 16),
-  //       decoration: BoxDecoration(
-  //           color: AppColors.secondBackground, borderRadius: BorderRadius.circular(10)),
-  //       child: Row(
-  //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //         children: [
-  //           Container(
-  //             child: NetworkImageWithLoader(src: product.image),
-  //           ),
-  //           Text(
-  //             product.name,
-  //             style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
-  //           ),
-  //           Icon(Icons.arrow_forward_ios_rounded)
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
 }
