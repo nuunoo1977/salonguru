@@ -31,10 +31,21 @@ final class ProductsPage extends StatelessWidget {
                     ),
                   ProductsLoaded() => ProductsList(products: state.products),
                   ProductsLoadingFailure() => Center(
-                      child: Text(
-                        state.messageToUser,
-                        textAlign: TextAlign.center,
-                        style: AppTextstyles.errorMessage,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            state.messageToUser,
+                            textAlign: TextAlign.center,
+                            style: AppTextstyles.errorMessage,
+                          ),
+                          SizedBox(height: 16),
+                          ElevatedButton.icon(
+                            onPressed: () => context.read<ProductsCubit>().load(true),
+                            label: Text("Try again"),
+                            icon: Icon(Icons.refresh),
+                          ),
+                        ],
                       ),
                     )
                 }),

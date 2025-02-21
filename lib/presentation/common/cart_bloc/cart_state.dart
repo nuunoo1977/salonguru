@@ -5,6 +5,7 @@ sealed class CartState extends Equatable {
   int get totalItems => 0;
   int get totalDistinctProducts => 0;
   double totalPrice(List<Product> products) => 0.0;
+  Map<int, int> get itemsQty => {};
 
   @override
   List<Object?> get props => [];
@@ -15,8 +16,9 @@ class CartUninitialized extends CartState {}
 class CartLoading extends CartState {}
 
 class CartLoaded extends CartState {
-  // TODO(nunofelicio): Fix issue with equatable not comparing maps and remote timestamp when not needed
+  // TODO(nunofelicio): Fix issue with equatable not comparing maps and remove timestamp when not needed
   final int _timestamp;
+  @override
   final Map<int, int> itemsQty;
   CartLoaded({required this.itemsQty}) : _timestamp = DateTime.now().millisecondsSinceEpoch;
 
