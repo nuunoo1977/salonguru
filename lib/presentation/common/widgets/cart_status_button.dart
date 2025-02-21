@@ -13,7 +13,7 @@ class CartStatusButton extends StatelessWidget {
       builder: (context, state) {
         return IconButton(
           icon: Badge(
-            offset: const Offset(2, 12),
+            offset: state.totalItems > 9 ? Offset(-2, 12) : Offset(2, 12),
             isLabelVisible: state.totalItems > 0,
             label: Text(state.totalItems.toString()),
             child: const Icon(Icons.shopping_cart),

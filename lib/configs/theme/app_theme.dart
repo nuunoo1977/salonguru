@@ -12,4 +12,10 @@ class AppTheme {
       textStyle: AppTextstyles.cartBadge,
     ),
   );
+
+  static final overlayButton = ButtonStyle(
+    padding: WidgetStateProperty.all(EdgeInsets.all(4)),
+    foregroundColor: WidgetStateProperty.all(Colors.white),
+    backgroundColor: WidgetStateProperty.all(Colors.black.withValues(alpha: 0.6)),
+  );
 }

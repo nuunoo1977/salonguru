@@ -44,7 +44,7 @@ class CartCubit extends Cubit<CartState> {
       updateItem(productId, (_itemsQty[productId] ?? 0) + qty);
 
   void removeItem(int productId, [int qty = 1]) =>
-      updateItem(productId, (_itemsQty[productId] ?? 0) + qty);
+      updateItem(productId, (_itemsQty[productId] ?? 0) - qty);
 
   void clearItem(int productId) => updateItem(productId, 0);
 
