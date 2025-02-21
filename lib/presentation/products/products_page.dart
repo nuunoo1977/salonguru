@@ -19,14 +19,6 @@ final class ProductsPage extends StatelessWidget {
         appBar: AppBar(
           title: Text('Salonguru Shop'),
           actions: [
-            Builder(builder: (context) {
-              return IconButton(
-                icon: const Icon(Icons.refresh),
-                onPressed: () {
-                  context.read<ProductsDisplayCubit>().loadOrders(true);
-                },
-              );
-            }),
             const CartStatusButton(),
           ],
         ),
