@@ -17,6 +17,7 @@ final class ProductsPage extends StatelessWidget {
       create: (context) => getIt<ProductsDisplayCubit>()..loadOrders(),
       child: Scaffold(
         appBar: AppBar(
+          centerTitle: false,
           title: Text('Salonguru Shop'),
           actions: [
             const CartStatusButton(),

@@ -5,7 +5,7 @@ import '../../../configs/theme/app_textstyles.dart';
 import '../../../configs/theme/app_theme.dart';
 import '../../../domain/entities/product.dart';
 import '../../common/cart_bloc/cart_cubit.dart';
-import '../../common/widgets/network_image_with_loader.dart';
+import '../../common/widgets/product_image.dart';
 
 // TODO(nunofelicio): add availabilty information (Sold out banner)
 class ProductCard extends StatelessWidget {
@@ -23,27 +23,7 @@ class ProductCard extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Stack(children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(16),
-                  child: Stack(children: [
-                    NetworkImageWithLoader(product.image, key: ValueKey(product.image)),
-                    Positioned(
-                      left: 0,
-                      bottom: 0,
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                        decoration: BoxDecoration(
-                          color: Colors.black.withValues(alpha: 0.6),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Text(
-                          "${product.price} €",
-                          style: AppTextstyles.cardTitles.copyWith(color: Colors.white),
-                        ),
-                      ),
-                    ),
-                  ]),
-                ),
+                ProductImage(product: product),
                 BlocBuilder<CartCubit, CartState>(
                     buildWhen: (previous, current) =>
                         current.itemQty(product.id) != previous.itemQty(product.id),

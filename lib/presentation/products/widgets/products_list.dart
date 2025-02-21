@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../domain/entities/product.dart';
-import '../../common/cart_bloc/cart_cubit.dart';
+import '../../product_details/product_details_page.dart';
 import '../bloc/products_display_cubit.dart';
 import 'product_card.dart';
 
@@ -23,13 +23,18 @@ class ProductsList extends StatelessWidget {
           crossAxisCount: 2,
           crossAxisSpacing: 8,
           mainAxisSpacing: 0,
-          //childAspectRatio: 0.6,
         ),
         itemBuilder: (BuildContext context, int index) {
           return ProductCard(
             product: products[index],
             key: ValueKey(products[index].id),
-            onTap: () => context.read<CartCubit>().addItem(products[index].id),
+            onTap: () => Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => ProductDetailPage(
+                  product: products[index],
+                ),
+              ),
+            ),
           );
         },
       ),
