@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../../configs/di/injection.dart';
+import '../../../domain/cart_repository.dart';
+import '../../../domain/entities/cart_item.dart';
 import '../../../domain/entities/product.dart';
 import 'product_card.dart';
 
@@ -24,6 +27,8 @@ class ProductsList extends StatelessWidget {
         return ProductCard(
           product: products[index],
           key: ValueKey(products[index].id),
+          onTap: () =>
+              getIt<CartRepository>().update(CartItem(productId: products[index].id, quantity: 1)),
         );
       },
     );

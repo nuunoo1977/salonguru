@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../configs/di/injection.dart';
 import '../../configs/theme/app_textstyles.dart';
+import '../../domain/cart_repository.dart';
 import '../common/widgets/body_wrapper.dart';
 import 'bloc/products_display_cubit.dart';
 import 'widgets/products_list.dart';
@@ -16,7 +17,7 @@ final class ProductsPage extends StatelessWidget {
       create: (context) => getIt<ProductsDisplayCubit>()..loadOrders(),
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Products'),
+          title: Text('Salonguru Shop'),
           actions: [
             Builder(builder: (context) {
               return IconButton(
@@ -26,12 +27,21 @@ final class ProductsPage extends StatelessWidget {
                 },
               );
             }),
-            IconButton(
-              icon: const Icon(Icons.shopping_cart),
-              onPressed: () {
-                // AppNavigator.push(context, const CartPage());
-              },
-            )
+            StreamBuilder(
+                stream: getIt<CartRepository>().watchItems,
+                builder: (context, snapshot) {
+                  return IconButton(
+                    icon: Badge(
+                      offset: const Offset(2, 12),
+                      isLabelVisible: snapshot.data?.isNotEmpty ?? false,
+                      label: Text(snapshot.data?.length.toString() ?? ''),
+                      child: const Icon(Icons.shopping_cart),
+                    ),
+                    onPressed: () {
+                      //context.read<ProductsDisplayCubit>().loadOrders(true);
+                    },
+                  );
+                }),
           ],
         ),
         body: BodyWrapper(

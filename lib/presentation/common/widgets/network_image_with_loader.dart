@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// TODO(nunofelicio): cache network images
 class NetworkImageWithLoader extends StatelessWidget {
   final String src;
   final BoxFit fit;
