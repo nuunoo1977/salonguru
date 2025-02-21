@@ -20,7 +20,6 @@
 
 <!-- /TOC -->
 
-
 ## Project Overview
 
 This project is a mobile application built using Flutter in the context a job interview assignment. Is not a complete project and is not intended to be, including this READ.me file.
@@ -103,6 +102,7 @@ In a real work scenario, many questions for the client would be asked before sta
 - Tests
 - Exclude *.emv from repository
 - Cache of network images
+- Responsive design for landscape mode or tablets
 - ...
 
 ### Todos
