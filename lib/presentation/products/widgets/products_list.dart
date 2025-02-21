@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../domain/entities/product.dart';
+import '../../common/products_bloc/products_cubit.dart';
 import '../../product_details/product_details_page.dart';
-import '../bloc/products_display_cubit.dart';
 import 'product_card.dart';
 
 // TODO(nunofelicio): make grid responsive for different screen orientations
@@ -15,7 +15,7 @@ class ProductsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
-      onRefresh: () async => context.read<ProductsDisplayCubit>().loadOrders(true),
+      onRefresh: () async => context.read<ProductsCubit>().load(true),
       child: GridView.builder(
         shrinkWrap: true,
         itemCount: products.length,

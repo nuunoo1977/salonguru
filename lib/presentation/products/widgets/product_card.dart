@@ -55,7 +55,7 @@ class ProductCard extends StatelessWidget {
                             iconSize: 16,
                             icon: Icon(Icons.remove_shopping_cart),
                             onPressed: () {
-                              context.read<CartCubit>().removeItem(product.id, qty);
+                              context.read<CartCubit>().clearItem(product.id);
                             }),
                       );
                     }),

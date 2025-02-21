@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'configs/di/injection.dart';
 import 'configs/theme/app_theme.dart';
 import 'presentation/common/cart_bloc/cart_cubit.dart';
+import 'presentation/common/products_bloc/products_cubit.dart';
 import 'presentation/products/products_page.dart';
 
 void main() {
@@ -20,9 +21,14 @@ class MyApp extends StatelessWidget {
       title: 'Salonguru',
       theme: AppTheme.appTheme,
       home: const ProductsPage(),
-      builder: (context, widget) => BlocProvider(
-        create: (_) => getIt<CartCubit>(),
-        child: widget,
+      builder: (context, widget) => MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (_) => getIt<CartCubit>(),
+          ),
+          BlocProvider(create: (context) => getIt<ProductsCubit>()..load()),
+        ],
+        child: widget!,
       ),
     );
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../configs/theme/app_textstyles.dart';
+import '../../../core/utils/double_extensions.dart';
 import '../../../domain/entities/product.dart';
 import 'network_image_with_loader.dart';
 
@@ -29,7 +30,7 @@ class ProductImage extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
             ),
             child: Text(
-              "${product.price} €",
+              product.price.toStringEuros,
               style: AppTextstyles.cardTitles.copyWith(color: Colors.white),
             ),
           ),

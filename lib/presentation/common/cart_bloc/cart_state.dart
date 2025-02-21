@@ -3,6 +3,8 @@ part of 'cart_cubit.dart';
 sealed class CartState extends Equatable {
   int itemQty(int productId) => 0;
   int get totalItems => 0;
+  int get totalDistinctProducts => 0;
+  double totalPrice(List<Product> products) => 0.0;
 
   @override
   List<Object?> get props => [];
@@ -20,8 +22,18 @@ class CartLoaded extends CartState {
 
   @override
   int itemQty(int productId) => itemsQty[productId] ?? 0;
+
   @override
   int get totalItems => itemsQty.values.fold(0, (prev, qty) => prev + qty);
+
+  @override
+  double totalPrice(List<Product> products) => itemsQty.entries.fold(
+      0.0,
+      (prev, item) =>
+          prev + item.value * (products.firstWhereOrNull((e) => e.id == item.key)?.price ?? 0));
+
+  @override
+  int get totalDistinctProducts => itemsQty.length;
 
   @override
   List<Object?> get props => [itemsQty, _timestamp];

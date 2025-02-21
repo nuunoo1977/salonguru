@@ -4,19 +4,19 @@ import 'package:injectable/injectable.dart';
 
 import '../../../domain/entities/product.dart';
 import '../../../domain/product_repository.dart';
-import '../../common/failure_to_user_message_extension.dart';
+import '../failure_to_user_message_extension.dart';
 
-part 'products_display_state.dart';
+part 'products_state.dart';
 
 @injectable
-class ProductsDisplayCubit extends Cubit<ProductsDisplayState> {
+class ProductsCubit extends Cubit<ProductsState> {
   final ProductRepository _productsRepository;
 
-  ProductsDisplayCubit({required ProductRepository productsRepository})
+  ProductsCubit({required ProductRepository productsRepository})
       : _productsRepository = productsRepository,
         super(Uninitialized());
 
-  void loadOrders([bool ignoreCache = false]) async {
+  void load([bool ignoreCache = false]) async {
     if (state is ProductsLoading) return;
     emit(ProductsLoading());
     var res = await _productsRepository.getAll(force: ignoreCache);

@@ -1,10 +1,12 @@
 import 'dart:async';
 
+import 'package:collection/collection.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../domain/cart_repository.dart';
+import '../../../domain/entities/product.dart';
 
 part 'cart_state.dart';
 
@@ -35,7 +37,11 @@ class CartCubit extends Cubit<CartState> {
   }
 
   void updateItem(int productId, int qty) async {
-    _itemsQty[productId] = qty;
+    if (qty == 0) {
+      _itemsQty.remove(productId);
+    } else {
+      _itemsQty[productId] = qty;
+    }
     emit(CartLoaded(itemsQty: Map.of(_itemsQty)));
     _saveToRepository();
   }
