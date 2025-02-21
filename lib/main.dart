@@ -19,9 +19,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Salonguru',
       theme: AppTheme.appTheme,
+      home: const ProductsPage(),
       builder: (context, widget) => BlocProvider(
         create: (_) => getIt<CartCubit>(),
-        child: ProductsPage(),
+        child: widget,
       ),
     );
   }
