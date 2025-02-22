@@ -22,14 +22,14 @@ class CartProductsList extends StatelessWidget {
               ProductsLoading() => const Center(
                   child: CircularProgressIndicator.adaptive(),
                 ),
-              ProductsLoaded() => _productsList(state.products),
               ProductsLoadingFailure() => Center(
                   child: Text(
                     state.messageToUser,
                     textAlign: TextAlign.center,
                     style: AppTextstyles.errorMessage,
                   ),
-                )
+                ),
+              ProductsLoaded() => _productsList(state.products),
             });
   }
 }

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../configs/theme/app_textstyles.dart';
 import '../common/products_bloc/products_cubit.dart';
 import '../common/widgets/body_wrapper.dart';
 import '../common/widgets/cart_status_button.dart';
+import '../common/widgets/error_message_widget.dart';
 import 'widgets/products_list.dart';
 
 final class ProductsPage extends StatelessWidget {
@@ -31,23 +31,11 @@ final class ProductsPage extends StatelessWidget {
                     ),
                   ProductsLoaded() => ProductsList(products: state.products),
                   ProductsLoadingFailure() => Center(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            state.messageToUser,
-                            textAlign: TextAlign.center,
-                            style: AppTextstyles.errorMessage,
-                          ),
-                          SizedBox(height: 16),
-                          ElevatedButton.icon(
-                            onPressed: () => context.read<ProductsCubit>().load(true),
-                            label: Text("Try again"),
-                            icon: Icon(Icons.refresh),
-                          ),
-                        ],
+                      child: ErrorMessageWidget(
+                        message: state.messageToUser,
+                        onRetry: () => context.read<ProductsCubit>().load(true),
                       ),
-                    )
+                    ),
                 }),
       ),
     );
