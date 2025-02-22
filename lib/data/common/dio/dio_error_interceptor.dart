@@ -35,7 +35,7 @@ class DioErrorInterceptor extends Interceptor {
       case DioExceptionType.cancel:
         throw CancelException();
       case DioExceptionType.unknown:
-        throw UnknownException();
+        throw ConnectionErrorException();
     }
     return handler.next(err);
   }

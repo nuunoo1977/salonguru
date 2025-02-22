@@ -5,7 +5,7 @@ import '../../core/errors/failures.dart';
 extension FailureToUserMessage on Failure {
   String toUserMessage() => switch (this) {
         ConnectionFailure() =>
-          "Internet connection failed. Please check your connection and try again.",
+          "There was an error connecting to the server. Please check your internet connection and try again.",
         ServerFailure() =>
           "There was an unexpected error. Please try again later. Please try again later.",
         UnknownFailure() => "There was an unexpected error. Please try again later.",
