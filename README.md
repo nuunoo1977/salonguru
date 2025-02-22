@@ -125,5 +125,5 @@ The project tries to follow Clean Architecture principles and the main packages/
 
 ## Android app (apk)
 
-[Download APK](demo/salonkee.apk)
+[Download APK](demo/salonguru.apk)
 
