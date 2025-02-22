@@ -33,13 +33,16 @@ class CartCheckoutCubit extends Cubit<CartCheckoutState> {
     try {
       var res = await _checkoutUseCase.execute(itemsQty);
       res.fold((failure) {
+        if (isClosed) return;
         emit(CheckoutFailure(messageToUser: failure.toUserMessage()));
       }, (result) {
         _cartCubit.clear();
         _productsCubit.load(true);
+        if (isClosed) return;
         emit(CheckoutSuccess(result: result));
       });
     } catch (e) {
+      if (isClosed) return;
       emit(CheckoutFailure(messageToUser: UnknownFailure().toUserMessage()));
     }
   }

@@ -103,6 +103,7 @@ In a real work scenario, many questions for the client would be asked before sta
 - Exclude *.emv from repository
 - Cache of network images
 - Responsive design for landscape mode or tablets
+- cancellation token on API requests
 - ...
 
 ### Todos

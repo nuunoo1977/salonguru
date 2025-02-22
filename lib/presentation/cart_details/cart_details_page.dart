@@ -15,78 +15,94 @@ final class CartDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: BackButton(),
-        actions: [
-          const CartStatusButton(onPressedNavigateToCart: false),
-        ],
+    return BlocProvider(
+      create: (context) => getIt<CartCheckoutCubit>(
+        param1: context.read<CartCubit>(),
+        param2: context.read<ProductsCubit>(),
       ),
-      body: BodyWrapper(
-        child: BlocProvider(
-          create: (context) => getIt<CartCheckoutCubit>(
-            param1: context.read<CartCubit>(),
-            param2: context.read<ProductsCubit>(),
-          ),
-          child: BlocConsumer<CartCheckoutCubit, CartCheckoutState>(
-            listener: (context, state) {
-              if (state is CheckoutSuccess) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text("Checkout successful!"),
-                  ),
-                );
-                Navigator.of(context).pop();
-              }
-            },
-            builder: (context, checkoutState) {
-              if (checkoutState is MakingCheckout) {
-                return Center(
-                  child: CircularProgressIndicator.adaptive(),
-                );
-              }
-
-              return BlocBuilder<CartCubit, CartState>(
-                buildWhen: (previous, current) => current.totalItems != previous.totalItems,
+      child: Builder(
+        builder: (context) => PopScope(
+          canPop: false,
+          onPopInvokedWithResult: (didPop, _) {
+            if (didPop) return;
+            if (context.read<CartCheckoutCubit>().state is MakingCheckout) return;
+            Navigator.of(context).pop();
+          },
+          child: Scaffold(
+            appBar: AppBar(
+              leading: BlocBuilder<CartCheckoutCubit, CartCheckoutState>(
+                buildWhen: (previous, current) => current.runtimeType != previous.runtimeType,
                 builder: (context, state) {
-                  return SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        CartProductsList(),
-                        if (state.totalItems > 0)
-                          Padding(
-                            padding: const EdgeInsets.only(top: 24.0),
-                            child: Center(
-                              child: ElevatedButton.icon(
-                                onPressed: switch (checkoutState) {
-                                  MakingCheckout() => null,
-                                  CheckoutSuccess() => null,
-                                  _ => () =>
-                                      context.read<CartCheckoutCubit>().checkout(state.itemsQty),
-                                },
-                                label: Text("Checkout"),
-                                icon: Icon(Icons.shopping_cart_checkout),
+                  return state is MakingCheckout ? Container() : BackButton();
+                },
+              ),
+              actions: [
+                const CartStatusButton(onPressedNavigateToCart: false),
+              ],
+            ),
+            body: BodyWrapper(
+              child: BlocConsumer<CartCheckoutCubit, CartCheckoutState>(
+                listener: (context, state) {
+                  if (state is CheckoutSuccess) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text("Checkout successful!"),
+                      ),
+                    );
+                    Navigator.of(context).pop();
+                  }
+                },
+                builder: (context, checkoutState) {
+                  if (checkoutState is MakingCheckout) {
+                    return Center(
+                      child: CircularProgressIndicator.adaptive(),
+                    );
+                  }
+
+                  return BlocBuilder<CartCubit, CartState>(
+                    buildWhen: (previous, current) => current.totalItems != previous.totalItems,
+                    builder: (context, state) {
+                      return SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            CartProductsList(),
+                            if (state.totalItems > 0)
+                              Padding(
+                                padding: const EdgeInsets.only(top: 24.0),
+                                child: Center(
+                                  child: ElevatedButton.icon(
+                                    onPressed: switch (checkoutState) {
+                                      MakingCheckout() => null,
+                                      CheckoutSuccess() => null,
+                                      _ => () => context
+                                          .read<CartCheckoutCubit>()
+                                          .checkout(state.itemsQty),
+                                    },
+                                    label: Text("Checkout"),
+                                    icon: Icon(Icons.shopping_cart_checkout),
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
-                        if (checkoutState is CheckoutFailure)
-                          Padding(
-                            padding: const EdgeInsets.only(top: 24.0),
-                            child: Center(
-                              child: Text(
-                                checkoutState.messageToUser,
-                                style: AppTextstyles.errorMessage,
+                            if (checkoutState is CheckoutFailure)
+                              Padding(
+                                padding: const EdgeInsets.only(top: 24.0),
+                                child: Center(
+                                  child: Text(
+                                    checkoutState.messageToUser,
+                                    style: AppTextstyles.errorMessage,
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
-                      ],
-                    ),
+                          ],
+                        ),
+                      );
+                    },
                   );
                 },
-              );
-            },
+              ),
+            ),
           ),
         ),
       ),
